@@ -19,8 +19,12 @@ app.use(logger("dev"));
 io.on("connection", (socket) => {
   console.log("Client connected");
 
-  socket.on("message", (data) => {
-    console.log(data);
+  socket.on("message", (body) => {
+    socket.broadcast.emit("message", {
+      body,
+      from: socket.id,
+    });
+    console.log(body);
   });
 });
 
