@@ -13,7 +13,7 @@ const port = process.env.PORT || 3000;
 const app = express();
 const server = http.createServer(app);
 const io = new SocketServer(server, {
-  cors: { origin: "http://localhost:5173" },
+  cors: { origin: "https://chatea-realtime.vercel.app/" },
 });
 
 app.use(cors());
