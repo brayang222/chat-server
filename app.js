@@ -1,9 +1,13 @@
+import { Server as SocketServer } from "socket.io";
+import { connectDB } from "./config/dbClient.js";
+import http from "http";
 import bodyParser from "body-parser";
 import express from "express";
 import cors from "cors";
 import logger from "morgan";
-import { Server as SocketServer } from "socket.io";
-import http from "http";
+import routeUsers from "./routes/users.js";
+import routeChats from "./routes/chat.js";
+import routeMessages from "./routes/message.js";
 
 const port = process.env.PORT || 3000;
 const app = express();
@@ -15,6 +19,11 @@ const io = new SocketServer(server, {
 app.use(cors());
 app.use(bodyParser.json());
 app.use(logger("dev"));
+
+connectDB();
+app.use("/users", routeUsers);
+app.use("/chat", routeChats);
+app.use("/message", routeMessages);
 
 io.on("connection", (socket) => {
   console.log("Client connected");
@@ -30,4 +39,9 @@ io.on("connection", (socket) => {
 
 server.listen(port, () => {
   console.log("Server is working at http://localhost:" + port);
+});
+
+process.on("SIGINT", async () => {
+  await closeDB();
+  process.exit(0);
 });
