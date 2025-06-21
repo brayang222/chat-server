@@ -17,9 +17,11 @@ class usersController {
 
       const token = generateToken(username);
 
-      return res
-        .status(200)
-        .json({ message: "Usuario loggueado con exito", token });
+      return res.status(200).json({
+        message: "Usuario Inicia sesion con exito",
+        userExists,
+        token,
+      });
     } catch (error) {
       console.error(error);
     }

@@ -12,12 +12,6 @@ class messageModel {
       .sort({ createdAt: 1 })
       .populate("sender");
   }
-
-  async markAsRead(messageId, userId) {
-    return await Message.findByIdAndUpdate(messageId, {
-      $addToSet: { readBy: userId },
-    });
-  }
 }
 
 export default new messageModel();
