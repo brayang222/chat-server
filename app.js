@@ -22,7 +22,6 @@ app.use(logger("dev"));
 
 connectDB();
 app.use("/users", routeUsers);
-app.use("/chat", routeChats);
 app.use("/message", routeMessages);
 
 io.on("connection", (socket) => {

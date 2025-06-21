@@ -3,4 +3,5 @@ node_modules
 
 #Ignore unnecessary files for now
 controllers/chat.js
-config
+models/chat.js
+routes/chat.js
