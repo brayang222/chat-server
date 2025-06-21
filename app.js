@@ -13,7 +13,7 @@ const port = process.env.PORT || 3000;
 const app = express();
 const server = http.createServer(app);
 const io = new SocketServer(server, {
-  cors: { origin: process.env.CLIENT_URL || "http://localhost:5173" },
+  cors: { origin: [process.env.CLIENT_URL, "http://localhost:5173"] },
 });
 
 app.use(cors());
