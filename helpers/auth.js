@@ -2,9 +2,7 @@ import "dotenv/config";
 import jsonwebtoken from "jsonwebtoken";
 
 export function generateToken(username) {
-  return jsonwebtoken.sign({ username }, process.env.JWT_SECRET, {
-    expiresIn: "1h",
-  });
+  return jsonwebtoken.sign({ username }, process.env.JWT_SECRET);
 }
 
 export function verificateToken(req, res, next) {

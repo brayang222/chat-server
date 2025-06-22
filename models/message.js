@@ -7,10 +7,8 @@ class messageModel {
     return await Message.create(data);
   }
 
-  async getByChatId(chatId) {
-    return await Message.find({ chatId })
-      .sort({ createdAt: 1 })
-      .populate("sender");
+  async getAll() {
+    return await Message.find().populate("sender");
   }
 }
 

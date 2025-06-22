@@ -5,3 +5,6 @@ node_modules
 controllers/chat.js
 models/chat.js
 routes/chat.js
+schemas/chat.js
+
+config.txt

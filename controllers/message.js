@@ -1,19 +1,12 @@
 import messageModel from "../models/message.js";
-import chatModel from "../models/chat.js";
 
 class messageController {
   constructor() {}
 
   async create(req, res) {
     try {
-      const { chatId, sender, content } = req.body;
-      const message = await messageModel.create({ chatId, sender, content });
-
-      await chatModel.updateLastMessage(chatId, {
-        sender,
-        content,
-        createdAt: message.createdAt,
-      });
+      const { sender, content } = req.body;
+      const message = await messageModel.create({ sender, content });
 
       res.status(201).json(message);
     } catch (err) {
@@ -22,10 +15,9 @@ class messageController {
     }
   }
 
-  async getByChat(req, res) {
+  async getMessages(req, res) {
     try {
-      const { chatId } = req.params;
-      const messages = await messageModel.getByChatId(chatId);
+      const messages = await messageModel.getAll();
       res.status(200).json(messages);
     } catch (err) {
       console.error(err);

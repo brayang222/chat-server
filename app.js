@@ -6,7 +6,6 @@ import express from "express";
 import cors from "cors";
 import logger from "morgan";
 import routeUsers from "./routes/users.js";
-import routeChats from "./routes/chat.js";
 import routeMessages from "./routes/message.js";
 
 const port = process.env.PORT || 3000;

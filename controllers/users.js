@@ -12,14 +12,19 @@ class usersController {
         return res.status(400).json({ message: "User is required" });
       }
 
+      var user = null;
+
       const userExists = await usersModel.getByUsername(username);
-      if (!userExists) await usersModel.create(username);
+      if (!userExists) {
+        user = await usersModel.create(username);
+      } else {
+        user = userExists;
+      }
 
       const token = generateToken(username);
 
       return res.status(200).json({
-        message: "Usuario Inicia sesion con exito",
-        userExists,
+        user,
         token,
       });
     } catch (error) {
